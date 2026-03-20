@@ -24,9 +24,9 @@ ElecChanger is a full-stack web application that allows users to exchange electr
 ###  Real-Time Chat
 - One-to-one private chat using Socket.io
 - Instant message delivery
-- ✔ Single tick (sent)
-- ✔✔ Double tick (delivered)
-- ✔✔ Seen status
+-  Single tick (sent)
+-  Double tick (delivered)
+-  Seen status
 - Auto-scroll & modern chat UI
 
 ###  Review & Rating System
