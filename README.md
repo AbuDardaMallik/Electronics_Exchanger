@@ -154,19 +154,13 @@ git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
 ```
 
 ##  Demo Login
-
-Email: abu@gmail.com 
-username: abu
-Password: abu
-
-Email: umme@gmail.com 
-username: umme
-Password: umme
-
-Email: habiba@gmail.com 
-username: habiba
-Password: habiba
-
+_________________________________________
+|      Email       | Username | Password |
+|------------------|----------|----------|
+| abu@gmail.com    |   abu    |   abu    |
+| umme@gmail.com   |   umme   |   umme   |
+| habiba@gmail.com |  habiba  |  habiba  |
+------------------------------------------
 
 ##  Challenges Faced
 
@@ -182,10 +176,6 @@ Password: habiba
 - MongoDB data relationships & population
 - Authentication using Passport.js
 
-##  Contribution
-
-Contributions are welcome! Feel free to fork this repository and submit a pull request.
-
 ##  License
 
 This project is licensed under the MIT License.
@@ -195,3 +185,7 @@ This project is licensed under the MIT License.
 Abu Darda Mallik  
 abudardamallik62@gmail.com  
 GitHub: https://github.com/AbuDardaMallik
+
+##  Contribution
+
+Contributions are welcome! Feel free to fork this repository and submit a pull request.
