@@ -100,7 +100,7 @@ app.use("/", userRoutes); // Use user routes
 chatController.handleSocket(io); // Initialize chat socket handling
 
 app.get("/", (req, res) => {
-  res.send("Home Page");
+  res.redirect("/listings");
 });
 
 app.get("/favicon.ico", (req, res) => res.status(204));
