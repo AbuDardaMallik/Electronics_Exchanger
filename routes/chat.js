@@ -11,7 +11,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
 
     const otherUserId = new mongoose.Types.ObjectId(userId);
 
-    // 🔥 receiver find
+    //  receiver find
     const receiver = await User.findById(otherUserId);
 
     const messages = await Chat.find({
@@ -26,7 +26,7 @@ router.get("/:userId", isLoggedIn, async (req, res, next) => {
     return res.render("chat/index.ejs", {
       messages,
       receiverId: userId,
-      receiver, // 🔥 ADD THIS
+      receiver,
     });
   } catch (err) {
     return next(err);

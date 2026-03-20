@@ -1,7 +1,5 @@
 const Listing = require("../models/listing"); // Import the Listing model
-const review = require("../models/review"); // Import the Listing model
 const Exchange = require("../models/exchange"); // Import the Exchange model
-const ExpressError = require("../utils/ExpressError"); // Import the custom ExpressError class
 
 module.exports.index = async (req, res, next) => {
   const allListings = await Listing.find({});
@@ -76,7 +74,7 @@ module.exports.destroyListing = async (req, res, next) => {
 module.exports.showListing = async (req, res, next) => {
   const { id } = req.params;
 
-  // 🔹 Listing fetch
+  //  Listing fetch
   const foundListing = await Listing.findById(id)
     .populate({
       path: "reviews",
@@ -89,7 +87,7 @@ module.exports.showListing = async (req, res, next) => {
     return res.redirect("/listings");
   }
 
-  // 🔹 Existing request check
+  //  Existing request check
   let existingRequest = null;
 
   if (req.user) {
@@ -99,7 +97,7 @@ module.exports.showListing = async (req, res, next) => {
     });
   }
 
-  // 🔥 NEW: user er nijer products
+  //  NEW: user er nijer products
   let userListings = [];
 
   if (req.user) {
@@ -109,10 +107,10 @@ module.exports.showListing = async (req, res, next) => {
     });
   }
 
-  // 🔹 Render
+  //  Render
   res.render("listings/show.ejs", {
     listing: foundListing,
     existingRequest,
-    userListings, // 👈 MUST PASS
+    userListings,
   });
 };
