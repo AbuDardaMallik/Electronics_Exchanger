@@ -1,4 +1,4 @@
-# 🔌 ElecChanger – Electronics Exchange Platform
+#  ElecChanger – Electronics Exchange Platform
 
 ElecChanger is a full-stack web application that allows users to exchange electronic gadgets with others. The platform includes a real-time chat system, exchange request workflow, and product review system.
 
