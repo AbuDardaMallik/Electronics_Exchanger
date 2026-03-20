@@ -11,6 +11,20 @@ const flash = require("connect-flash"); // to use connect-flash for flash messag
 const passport = require("passport"); // to use passport for authentication
 // const LocalStrategy = require("passport-local"); // to use passport-local for local authentication strategy
 const User = require("./models/user.js"); // Import the User model
+const exchangeRoutes = require("./routes/exchange");
+const { pendingRequests } = require("./middleware");
+
+// Chat related imports
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
+const chatController = require("./controllers/chatController");
+const chatRoutes = require("./routes/chat");
 
 const listingsRoutes = require("./routes/listing"); // Import listing routes
 const reviewsRoutes = require("./routes/review"); // Import review routes
@@ -23,6 +37,8 @@ app.use(express.static(path.join(__dirname, "public"))); // ai line ta public fo
 app.use(express.urlencoded({ extended: true })); // to parse form data
 app.use(methodOverride("_method")); // to use method-override
 
+mongoose.set("strictQuery", true);
+
 // app.use(express.json());
 
 // Connect to MongoDB
@@ -31,7 +47,7 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/airbnbDatabase");
+  await mongoose.connect("mongodb://127.0.0.1:27017/ElectronicsDB");
   console.log("Connected to MongoDB");
 }
 
@@ -67,22 +83,44 @@ app.use((req, res, next) => {
   next();
 }); // Middleware to set flash messages in res.locals for access in all views
 
+app.use((req, res, next) => {
+  res.locals.pendingRequests = 0;
+  next();
+});
+
+app.use(pendingRequests);
+
 app.use("/listings", listingsRoutes); // Use listing routes
 app.use("/listings/:id/reviews", reviewsRoutes); // Use reviews routes
+app.use("/exchange", exchangeRoutes); // Use exchange routes
+app.use("/chat", chatRoutes);
 app.use("/", userRoutes); // Use user routes
+
+// Chat functionality
+chatController.handleSocket(io); // Initialize chat socket handling
 
 app.get("/", (req, res) => {
   res.send("Home Page");
 });
 
+app.get("/favicon.ico", (req, res) => res.status(204));
+
 // 404 handler
-app.all(/.*/, (req, res, next) => {
+app.use((req, res, next) => {
+  const url = req.originalUrl;
+
+  //  ignore these requests
+  if (url.startsWith("/socket.io") || url === "/favicon.ico") {
+    return res.end();
+  }
+
   next(new ExpressError("Page Not Found!", 404));
 });
 
 // error middleware
 app.use((err, req, res, next) => {
   const { status = 500, message = "Something went wrong" } = err;
+  console.log(err);
   res.render("error.ejs", { err });
 
   // Alternatively, you can send a simple response
@@ -90,6 +128,6 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

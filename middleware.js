@@ -2,6 +2,7 @@ const Listing = require("./models/listing"); // Import the Listing model
 const Review = require("./models/review"); // Import the Review model
 const ExpressError = require("./utils/ExpressError"); // Import the custom ExpressError class
 const { listingSchema, reviewSchema } = require("./schema.js"); // Import the listing schema for validation
+const Exchange = require("./models/exchange");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -62,4 +63,22 @@ module.exports.validateReview = (req, res, next) => {
   } else {
     next();
   }
+};
+
+module.exports.pendingRequests = async (req, res, next) => {
+  if (!req.user) {
+    res.locals.pendingRequests = 0;
+    return next();
+  }
+
+  const requests = await Exchange.find({
+    toUser: req.user._id,
+    status: "pending",
+  }).populate("product");
+
+  const validRequests = requests.filter((r) => r.product && r.product._id);
+
+  res.locals.pendingRequests = validRequests.length;
+
+  next();
 };

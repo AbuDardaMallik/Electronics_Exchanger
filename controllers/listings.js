@@ -1,5 +1,7 @@
 const Listing = require("../models/listing"); // Import the Listing model
 const review = require("../models/review"); // Import the Listing model
+const Exchange = require("../models/exchange"); // Import the Exchange model
+const ExpressError = require("../utils/ExpressError"); // Import the custom ExpressError class
 
 module.exports.index = async (req, res, next) => {
   const allListings = await Listing.find({});
@@ -74,23 +76,43 @@ module.exports.destroyListing = async (req, res, next) => {
 module.exports.showListing = async (req, res, next) => {
   const { id } = req.params;
 
+  // 🔹 Listing fetch
   const foundListing = await Listing.findById(id)
     .populate({
       path: "reviews",
-      populate: {
-        path: "owner",
-      },
+      populate: { path: "owner" },
     })
-    .populate("owner"); // Data base theke listings er related all reviews asbe and tar sathe sathe owner er information o asbe
-  const allReviews = await review.find({});
+    .populate("owner");
 
   if (!foundListing) {
     req.flash("error", "listing you requested does not exist!");
     return res.redirect("/listings");
   }
 
+  // 🔹 Existing request check
+  let existingRequest = null;
+
+  if (req.user) {
+    existingRequest = await Exchange.findOne({
+      fromUser: req.user._id,
+      product: id,
+    });
+  }
+
+  // 🔥 NEW: user er nijer products
+  let userListings = [];
+
+  if (req.user) {
+    userListings = await Listing.find({
+      owner: req.user._id,
+      _id: { $ne: id },
+    });
+  }
+
+  // 🔹 Render
   res.render("listings/show.ejs", {
     listing: foundListing,
-    reviews: allReviews,
+    existingRequest,
+    userListings, // 👈 MUST PASS
   });
 };

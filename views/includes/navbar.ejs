@@ -4,7 +4,7 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <i class="fa-regular fa-compass"></i>
-      Airbnb
+      ElecChanger
     </a>
     <button
       class="navbar-toggler"
@@ -17,9 +17,17 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/listings">All Listings</a>
-        <a class="nav-link" href="/listings/new">Add New Listing</a>
+        <a class="nav-link" href="/listings">All Products</a>
+        <a class="nav-link" href="/listings/new">Add New Product</a>
+        <a class="nav-link" href="/exchange">My Exchanges
+          <% if(pendingRequests && pendingRequests > 0) { %>
+            <span class="badge bg-danger">
+              <%= pendingRequests %> 
+            </span>
+          <% } %>
+        </a>
       </div>
+
       <div class="navbar-nav ms-auto">
           <% if(currentUser) { %>      
             <a class="nav-link" href="/logout">Logout</a>
@@ -27,7 +35,9 @@
             <a class="nav-link" href="/login">Login</a>
             <a class="nav-link" href="/signup">Signup</a>
           <% } %>
+          <a class="nav-link" href="/profile">Profile</a>
       </div>
+      
     </div>
   </div>
 </nav>

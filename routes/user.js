@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync"); // Import the wrapAsync utility function
 const passport = require("passport"); // to use passport for authentication
-const { saveRedirectUrl } = require("../middleware");
+
+const { saveRedirectUrl, isLoggedIn } = require("../middleware");
 
 const userController = require("../controllers/users");
 
@@ -11,6 +12,8 @@ router.get("/signup", userController.renderSignUpForm);
 router.post("/signup", wrapAsync(userController.signup));
 
 router.get("/login", userController.renderLoginForm);
+
+router.get("/profile", isLoggedIn, userController.profile);
 
 router.post(
   "/login",

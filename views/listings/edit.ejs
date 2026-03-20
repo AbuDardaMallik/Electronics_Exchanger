@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 <div class="row mt-3">
   <div class="col-8 offset-2">
-    <h1 class="edit-name">Edit Listing</h1>
+    <h1 class="edit-name">Edit Electronic Product</h1>
 
     <form
       action="/listings/<%= listing._id %>?_method=PUT"
@@ -63,6 +63,47 @@
         </div>
       </div>
 
+
+      <!-- Category -->
+      <div class="mb-3">
+        <label class="form-label">Category:</label>
+        <select name="category" class="form-control" required>
+          <option value="">Select Category</option>
+
+          <option <%= listing.category === "Mobile" ? "selected" : "" %>>Mobile</option>
+          <option <%= listing.category === "Laptop" ? "selected" : "" %>>Laptop</option>
+          <option <%= listing.category === "Tablet" ? "selected" : "" %>>Tablet</option>
+          <option <%= listing.category === "Accessories" ? "selected" : "" %>>Accessories</option>
+          <option <%= listing.category === "Camera" ? "selected" : "" %>>Camera</option>
+          <option <%= listing.category === "Gaming" ? "selected" : "" %>>Gaming</option>
+          <option <%= listing.category === "Electronics" ? "selected" : "" %>>Electronics</option>
+        </select>
+      </div>
+
+      <!-- Condition -->
+      <div class="mb-3">
+        <label class="form-label">Condition:</label>
+        <select name="condition" class="form-control" required>
+          <option value="">Select Condition</option>
+
+          <option <%= listing.condition === "New" ? "selected" : "" %>>New</option>
+          <option <%= listing.condition === "Used" ? "selected" : "" %>>Used</option>
+        </select>
+      </div>
+
+      <!-- Exchange -->
+      <div class="mb-3">
+        <label class="form-label">Exchange With:</label>
+        <input
+          type="text"
+          name="exchangeWith"
+          class="form-control"
+          value="<%= listing.exchangeWith %>"
+          required
+        />
+      </div>
+
+
       <div>
         <div class="row">
           <div class="col-md-4">
@@ -121,7 +162,7 @@
 
       <!-- Add a submit button -->
       <button type="submit" class="btn btn-dark add-btn mt-3 mb-4">
-        Update Listing
+        Update Product 
       </button>
     </form>
   </div>

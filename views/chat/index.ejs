@@ -1,0 +1,57 @@
+<% layout('layouts/boilerplate') %>
+
+<h3 class="chat-title">
+  Private Chat to <b>@<%= receiver?.username || "Deleted User" %></b>
+</h3>
+
+<div id="messages" class="chat-box">
+
+  <% if(messages.length === 0) { %>
+    <p class="empty">Start chatting with <b>@<%= receiver.username %></b>!</p>
+  <% } %>
+
+<% messages.forEach(msg => { %>
+  <% const isMe = msg.sender._id.toString() === currentUser._id.toString(); %>
+
+  <div class="message <%= isMe ? 'me' : 'other' %>" id="<%= msg._id %>">
+    
+    <div class="bubble">
+      <%= msg.message %>
+
+      <% if (isMe) { %>
+        <span class="status">
+          <% if (msg.seen) { %>
+            ✔✔
+          <% } else { %>
+            ✔
+          <% } %>
+        </span>
+      <% } %>
+    </div>
+
+  </div>
+<% }) %>
+
+</div>
+
+<div class="chat-input">
+    <input id="msg" placeholder="Type a message..." />
+    <button id="sendBtn">Send</button>
+</div>
+
+<script>
+  const ids = [
+    "<%= currentUser._id.toString() %>",
+    "<%= receiverId.toString() %>"
+  ];
+
+  ids.sort();
+
+  window.roomId = ids.join("_"); 
+
+  window.currentUserId = "<%= currentUser._id %>";
+  window.receiverId = "<%= receiverId %>";
+</script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chat.js"></script>

@@ -8,6 +8,10 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 }); // akhane jodi amra username and password field ta na dei tahole o passport-local-mongoose plugin ta nijer moto username and password field create kore nibe and authentication er jonno use korbe. but ekhane ami explicitly username and password field ta diyechi jate code ta aro clear hoy.
 
 userSchema.plugin(passportLocalMongoose);

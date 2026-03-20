@@ -1,0 +1,95 @@
+<% layout('layouts/boilerplate') %>
+
+<h2 class="mt-4 "> Exchange Dashboard
+    <% if(pendingRequests > 0) { %>
+        <span class="badge bg-danger">
+            <%= pendingRequests %> New
+        </span>
+    <% } %>
+</h2>  
+
+<!-- ================= RECEIVED ================= -->
+ <div class="mt-3 mb-5 p-4 bg-light border rounded shadow-sm ">
+
+<h4 class="mt-4 text-success"> Requests Received</h4>
+
+<% if(receivedRequests.length === 0) { %>
+  <p>No incoming requests</p>
+<% } %>
+
+<% receivedRequests.forEach(req => { %>
+  <div class="card p-3 mt-2">
+    <p><b>Product:</b> <%= req.product?.title || "Deleted Product" %></p>
+    <p><b>Offered Product:</b> <%= req.offeredProduct?.title || "N/A" %></p>
+    <p><b>From:</b> <%= req.fromUser.username %></p>
+    <p><b>Status:</b>
+        <% if(req.status === "pending") { %>
+            <span class="badge bg-warning">Pending</span>
+        <% } else if(req.status === "accepted") { %>
+            <span class="badge bg-success">Accepted</span>
+        <% } else { %>
+            <span class="badge bg-danger">Rejected</span>
+        <% } %>
+    </p>
+
+    <% if(req.status === "pending") { %>
+        <div class="mt-2">
+            <form action="/exchange/<%= req._id %>/accept" method="POST" class="d-inline">
+                <button class="btn btn-success btn-sm">Accept</button>
+            </form>
+        </div>
+        <div class="mt-2">
+            <form action="/exchange/<%= req._id %>/reject" method="POST" class="d-inline">
+                <button class="btn btn-danger btn-sm">Reject</button>
+            </form>
+        </div>
+        
+    <% } %>
+
+
+    <% if(req.status === "accepted") { %>
+        <a href="/chat/<%= req.fromUser._id %>" class="btn btn-dark btn-sm mt-2">
+            Chat Now 
+        </a>
+    <% } %>
+
+  </div>
+<% }) %>
+
+</div>
+
+<!-- ================= SENT ================= -->
+ <div class="mt-3 mb-5 p-4 bg-light border rounded shadow-sm ">
+
+
+<h4 class="mt-5 text-primary "> Requests Sent</h4>
+
+<% if(sentRequests.length === 0) { %>
+  <p>No sent requests</p>
+<% } %>
+
+<% sentRequests.forEach(req => { %>
+  <div class="card p-3 mt-2">
+    <p><b>Product:</b> <%= req.product?.title || "Deleted Product" %></p>
+    <p><b>To:</b> <%= req.toUser.username %></p>
+    <p>
+        <b>Status:</b>
+        <% if(req.status === "pending") { %>
+            <span class="badge bg-warning">Pending</span>
+        <% } else if(req.status === "accepted") { %>
+            <span class="badge bg-success">Accepted</span>
+        <% } else { %>
+            <span class="badge bg-danger">Rejected</span>
+        <% } %>
+    </p>
+
+    <% if(req.status === "accepted") { %>
+        <a href="/chat/<%= req.toUser._id %>" class="btn btn-dark btn-sm mt-2">
+            Chat Now 
+        </a>
+    <% } %>
+
+
+  </div>
+<% }) %>
+</div>
