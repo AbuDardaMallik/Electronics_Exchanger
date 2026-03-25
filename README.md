@@ -108,17 +108,13 @@ Electronics_Exchanger/
      ```bash 
      git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
      cd Electronics_Exchanger
-     
 2. Install dependencies:
      npm install
-   
 3. Create a .env file:
     ATLASDB_URL=your_mongodb_connection_string
    SECRET=your_secret_key
-   
 4. Run the app:
     node app.js
-   
 5. Open in browser:
      http://localhost:8080
  
