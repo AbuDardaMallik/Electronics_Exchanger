@@ -3,7 +3,6 @@
 A full-stack web application that allows users to exchange electronic devices with others using a secure workflow and real-time chat system.
 Built with Node.js, Express, MongoDB, and Socket.io.
 
----
 ##  Live Demo
 
  https://elecchanger.onrender.com
@@ -13,17 +12,28 @@ Built with Node.js, Express, MongoDB, and Socket.io.
 ![Socket.io](https://img.shields.io/badge/Socket.io-Realtime-black)
 ![License](https://img.shields.io/badge/License-ISC-blue)
 
+---
 
 ## Features
 
-###  Authentication
-- Secure user signup & login using Passport.js
-- Session-based authentication
+###  Authentication & Authorization
+
+* Secure user authentication using **Passport.js**
+* Session-based login system
+* Authorization:
+
+  * Only listing owners can edit/delete listings
+  * Only review owners can modify their reviews
+
+---
 
 ###  Product Listings
-- Create, edit, delete products
-- View all available electronics
-- Detailed product pages
+
+* Create, Edit, Delete listings
+* View all listings in a responsive grid
+* Detailed listing page with full information
+
+---
 
 ###  Exchange System
 - Send exchange requests
@@ -36,11 +46,45 @@ Built with Node.js, Express, MongoDB, and Socket.io.
 - Instant message delivery (Socket.io)
 - Sent ✔, Delivered ✔✔, Seen status
 - Auto-scroll chat UI
+- 
+- --
 
-###  Review & Rating
-- Add reviews to products
-- Star rating system
-- Build user trust
+###  Reviews & Ratings
+
+* Add reviews with 1–5 star ratings
+* Edit and delete reviews
+* Dynamic star rating UI
+* Review ownership protection
+
+---
+
+###  Search Functionality
+
+* Search listings by:
+
+  * Title
+  * Description
+  * Location
+  * Country
+  * Price
+  * exchangeWith
+  * condition
+* Case-insensitive search using MongoDB regex
+
+---
+
+###  Flash Messages
+
+* Real-time success & error alerts using **connect-flash**
+
+---
+
+###  Data Validation
+
+* Server-side validation using **Joi**
+* Client-side validation using **Bootstrap**
+
+
 ---
 
 ##  Architecture
@@ -64,70 +108,135 @@ Client → Routes → Controllers → Database → Views / Socket Events
 4. On acceptance, users can chat in real-time
 5. After exchange, users can leave reviews
 
-## Tech Stack
+---
 
-**Frontend:**
+##  Tech Stack
 
-- EJS (Embedded JavaScript)
-- HTML, CSS, Bootstrap
+###  Frontend
 
-**Backend:**
+* HTML5, CSS3, Bootstrap 5
+* EJS (Embedded JavaScript Templates)
 
-- Node.js
-- Express.js
+###  Backend
 
-**Database:**
+* Node.js
+* Express.js
 
-- MongoDB (Mongoose)
+###  Database
 
-**Authentication:**
+* MongoDB Atlas (Cloud Database)
+* Mongoose ODM
 
-- Passport.js
-
-**Real-time:**
+###  Real-time:
 
 - Socket.io
 
+
+###  Authentication
+
+* Passport.js
+* Passport-Local-Mongoose
+
+###  Cloud & Deployment
+
+* **Render** – Backend hosting
+* **MongoDB Atlas** – Cloud database
+
+###  Tools & Libraries
+
+* Joi (Validation)
+* Express-Session
+* Connect-Mongo (Session Store)
+* Method-Override
+* Connect-Flash
+* EJS-Mate (Layouts)
+
 ---
 
-## Project Structure (MVC)
+##  Project Structure (MVC Architecture)
 
-Electronics_Exchanger/
+```bash
+StayFinder/
 │
-├── models/ # Database schemas
-├── routes/ # Express routes
-├── controllers/ # Business logic
-├── views/ # EJS templates
-├── public/ # CSS, JS, static files
-├── app.js # Main server file
-
-
-##  Installation
-
-1. Clone the repository:
-     ```bash 
-     git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
-     cd Electronics_Exchanger
-2. Install dependencies:
-     npm install
-3. Create a .env file:
-    ATLASDB_URL=your_mongodb_connection_string
-   SECRET=your_secret_key
-4. Run the app:
-    node app.js
-5. Open in browser:
-     http://localhost:8080
- 
-
-
-## Environment Variables
+├── models/         # Database Schemas (User, Listing, Review)
+├── routes/         # Route Definitions
+├── controllers/    # Business Logic
+├── views/          # EJS Templates
+│   ├── layouts/
+│   ├── listings/
+│   ├── reviews/
+│   ├── users/
+│   └── includes/
+│
+├── public/         # Static Files (CSS, JS)
+├── utils/          # Utility Functions
+├── middleware.js   # Custom Middleware
+├── schema.js       # Joi Validation Schemas
+├── cloudConfig.js  # Cloudinary Setup
+├── app.js          # Main Application Entry Point
+└── package.json
 ```
-__________________________________________
-| Variable    | Description               |
-| ----------- | ------------------------- |
+
+---
+
+##  Installation & Local Setup
+
+###  Clone Repository
+
+```bash
+git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
+cd Electronics_Exchanger
+```
+
+###  Install Dependencies
+
+```bash
+npm install
+```
+
+###  Create a .env file:
+```bash
+ATLASDB_URL=your_mongodb_connection_string
+SECRET=your_secret_key
+```
+
+###  Run the Application
+
+```bash
+node app.js
+```
+
+### Open in browser:
+```bash
+http://localhost:8080
+```
+
+##  Environment Variables
+
+| Variable | Description |
+|----------|------------|
 | ATLASDB_URL | MongoDB connection string |
-| SECRET      | Session secret key        |
+| SECRET | Session secret key |
+
+---
+##  Demo Login
+_________________________________________
+|      Email       | Username | Password |
+|------------------|----------|----------|
+| abu@gmail.com    |   abu    |   abu    |
+| darda@gmail.com  |  darda   |  darda   |
+| mallik@gmail.com |  mallik  |  mallik  |
 ------------------------------------------
+
+##  Deployment
+
+This project is fully deployed and running in production:
+
+*  **Backend Hosting:** Render
+*  **Database:** MongoDB Atlas
+
+ Live URL: https://elecchanger.onrender.com
+```
 
 ```
 
@@ -207,17 +316,6 @@ __________________________________________
 
 
 ---
-
-
-
-
-##  Demo Login
-
-| Email | Username | Password |
-|------|----------|----------|
-| abu@gmail.com | abu | abu |
-| darda@gmail.com | darda | darda |
-| mallik@gmail.com | mallik | mallik |
 
 ## Challenges Faced
 
