@@ -4,7 +4,10 @@ const currentUserId = window.currentUserId;
 const receiverId = window.receiverId;
 
 socket.on("connect", () => {
-  socket.emit("joinRoom", roomId);
+  socket.emit("joinRoom", {
+    sender: currentUserId,
+    receiver: receiverId,
+  });
 });
 
 let lastTempId = null;
@@ -22,7 +25,6 @@ function sendMsg() {
   if (!message) return;
 
   socket.emit("sendMessage", {
-    roomId,
     message,
     sender: currentUserId,
     receiver: receiverId,
@@ -74,3 +76,47 @@ window.onload = () => {
     }
   });
 };
+
+socket.on("receiveMessage", (data) => {
+  const chatBox = document.getElementById("messages");
+
+  const isMe = String(data.sender) === String(currentUserId);
+
+  //  duplicate avoid (sender side)
+  if (isMe && lastTempId) {
+    const temp = document.getElementById(lastTempId);
+    if (temp) {
+      temp.id = data._id; // replace temp id with real id
+    }
+    return;
+  }
+
+  //  receiver side message show
+  const div = document.createElement("div");
+  div.className = "message " + (isMe ? "me" : "other");
+  div.id = data._id;
+
+  div.innerHTML = `
+    <div class="bubble">
+      ${data.message}
+      ${isMe ? `<span class="status">✔</span>` : ""}
+    </div>
+  `;
+
+  chatBox.appendChild(div);
+
+  scrollBottom();
+
+  //  receiver automatically mark seen
+  if (!isMe) {
+    socket.emit("markSeen", data._id);
+  }
+});
+
+socket.on("messageSeen", (msgId) => {
+  const msgEl = document.getElementById(msgId);
+  if (msgEl) {
+    const status = msgEl.querySelector(".status");
+    if (status) status.innerText = "✔✔";
+  }
+});

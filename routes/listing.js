@@ -11,6 +11,10 @@ router.get("/", wrapAsync(listingController.index));
 // new route to display form for creating a new listing
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
+// search route to handle search queries for listings based on title, description, country, or location
+// listings/search?query=searchTerm
+router.get("/search", wrapAsync(listingController.searchListings));
+
 // create route to handle form submission for creating a new listing
 router.post(
   "/",

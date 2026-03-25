@@ -5,16 +5,16 @@ module.exports.handleSocket = (io) => {
     console.log("User Connected:", socket.id);
 
     // Join Room
-    socket.on("joinRoom", (roomId) => {
+    socket.on("joinRoom", ({ sender, receiver }) => {
+      const roomId = [sender, receiver].sort().join("_");
+
       console.log("JOIN ROOM:", roomId);
       socket.join(roomId);
     });
 
     // Send Message
     socket.on("sendMessage", async (data) => {
-      console.log("SEND:", data.roomId);
-
-      const { roomId, message, sender, receiver } = data;
+      const { message, sender, receiver } = data;
 
       try {
         const newMsg = await Chat.create({
@@ -23,13 +23,16 @@ module.exports.handleSocket = (io) => {
           message,
         });
 
-        if (roomId) {
-          io.to(roomId).emit("receiveMessage", {
-            message: newMsg.message,
-            sender: newMsg.sender,
-            _id: newMsg._id,
-          });
-        }
+        const populatedMsg = await newMsg.populate("sender");
+
+        // 🔥 ROOM SERVER SIDE CREATE
+        const roomId = [sender, receiver].sort().join("_");
+
+        io.to(roomId).emit("receiveMessage", {
+          message: populatedMsg.message,
+          sender: populatedMsg.sender._id.toString(),
+          _id: populatedMsg._id,
+        });
       } catch (err) {
         console.log("Chat Error:", err);
       }

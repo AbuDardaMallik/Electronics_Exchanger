@@ -4,29 +4,37 @@
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <div class="card shadow-sm">
       <div class="card-body">
-        <h3 class="mb-4 text-center">
-          Review this Product: <%= listing.title %>
-        </h3>
+        <h3 class="mb-4 text-center">Add a Review for <%= listing.title %></h3>
+
         <form
           action="/listings/<%= listing._id %>/reviews"
           method="POST"
           novalidate
           class="needs-validation"
         >
-          <!-- Rating -->
-          <div class="mb-3">
-            <label class="form-label fw-semibold">Rating</label>
-            <select name="rating" class="form-select" required>
-              <option value="">Select rating</option>
-              <option value="1">⭐ 1 - Very Bad</option>
-              <option value="2">⭐ 2 - Bad</option>
-              <option value="3">⭐ 3 - Average</option>
-              <option value="4">⭐ 4 - Good</option>
-              <option value="5">⭐ 5 - Excellent</option>
-            </select>
-            <div class="valid-feedback">Rating looks good!</div>
-            <div class="invalid-feedback">Please provide a rating.</div>
-          </div>
+          <!-- Rating from githoub https://github.com/LunarLogic/starability-->
+          <label class="form-label fw-semibold">Rating:</label>
+          <fieldset class="starability-slot">
+            <input
+              type="radio"
+              id="no-rate"
+              class="input-no-rate"
+              name="rating"
+              value="0"
+              checked
+              aria-label="No rating."
+            />
+            <input type="radio" id="first-rate1" name="rating" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input type="radio" id="first-rate2" name="rating" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input type="radio" id="first-rate3" name="rating" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input type="radio" id="first-rate4" name="rating" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input type="radio" id="first-rate5" name="rating" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
 
           <!-- Comment -->
           <div class="mb-3">

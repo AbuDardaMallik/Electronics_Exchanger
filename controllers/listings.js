@@ -114,3 +114,27 @@ module.exports.showListing = async (req, res, next) => {
     userListings,
   });
 };
+
+// search functionality
+module.exports.searchListings = async (req, res, next) => {
+  const { query } = req.query;
+
+  let conditions = [
+    { title: { $regex: query, $options: "i" } },
+    { description: { $regex: query, $options: "i" } },
+    { location: { $regex: query, $options: "i" } },
+    { condition: { $regex: query, $options: "i" } },
+    { category: { $regex: query, $options: "i" } },
+    { exchangeWith: { $regex: query, $options: "i" } },
+  ];
+
+  if (!isNaN(query)) {
+    conditions.push({ price: Number(query) });
+  }
+
+  const searchResults = await Listing.find({
+    $or: conditions,
+  });
+
+  res.render("listings/index.ejs", { listings: searchResults, query });
+};
