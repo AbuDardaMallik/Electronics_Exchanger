@@ -101,54 +101,37 @@ Electronics_Exchanger/
 ├── public/ # CSS, JS, static files
 ├── app.js # Main server file
 
-## ⚙️ Installation
+
+##  Installation
 
 1. Clone the repository:
-```bash
-git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
-cd Electronics_Exchanger
-Install dependencies:
-npm install
-Create a .env file:
-ATLASDB_URL=your_mongodb_connection_string
-SECRET=your_secret_key
-Run the app:
-node app.js
-Open in browser:
-http://localhost:8080
-🔐 Environment Variables
-Variable	Description
-ATLASDB_URL	MongoDB connection string
-SECRET	Session secret key
-
-## ⚙️ Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
-cd Electronics_Exchanger
-
+     ```bash 
+     git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
+     cd Electronics_Exchanger
+     
 2. Install dependencies:
-npm install
-
+     npm install
+   
 3. Create a .env file:
-ATLASDB_URL=your_mongodb_connection_string
-SECRET=your_secret_key
-
+    ATLASDB_URL=your_mongodb_connection_string
+   SECRET=your_secret_key
+   
 4. Run the app:
-node app.js
-
+    node app.js
+   
 5. Open in browser:
-http://localhost:8080
+     http://localhost:8080
+ 
+
 
 ## Environment Variables
+```
+__________________________________________
 | Variable    | Description               |
 | ----------- | ------------------------- |
 | ATLASDB_URL | MongoDB connection string |
 | SECRET      | Session secret key        |
-
-
----
+------------------------------------------
 
 ```
 
