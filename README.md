@@ -107,6 +107,26 @@ Electronics_Exchanger/
 ```bash
 git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
 cd Electronics_Exchanger
+Install dependencies:
+npm install
+Create a .env file:
+ATLASDB_URL=your_mongodb_connection_string
+SECRET=your_secret_key
+Run the app:
+node app.js
+Open in browser:
+http://localhost:8080
+🔐 Environment Variables
+Variable	Description
+ATLASDB_URL	MongoDB connection string
+SECRET	Session secret key
+
+## ⚙️ Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/AbuDardaMallik/Electronics_Exchanger.git
+cd Electronics_Exchanger
 
 2. Install dependencies:
 npm install
@@ -138,34 +158,44 @@ http://localhost:8080
 
 ## Login Page
 
-<img width="1919" height="873" alt="Screenshot 2026-03-20 190431" src="https://github.com/user-attachments/assets/b5b13752-c4df-4ab0-9e4f-d9f51db728ec" />
+<img width="1919" height="878" alt="Screenshot 2026-03-26 033603" src="https://github.com/user-attachments/assets/019b52f7-fa3f-43ae-8dde-7921d3a2b550" />
+
 
 ### SignUp Page
 
-<img width="1919" height="875" alt="Screenshot 2026-03-20 190411" src="https://github.com/user-attachments/assets/5136b76c-8e98-4359-b684-14c967b3ba6a" />
+<img width="1919" height="881" alt="Screenshot 2026-03-26 033624" src="https://github.com/user-attachments/assets/102fcb40-3f56-4b33-b98f-5fbdbb3d7927" />
+
 
 ### Home Page Before Login
-<img width="1919" height="877" alt="Screenshot 2026-03-20 190306" src="https://github.com/user-attachments/assets/7ce4d843-c7a6-4b68-876b-5083c2d35a53" />
+<img width="1919" height="880" alt="Screenshot 2026-03-26 033526" src="https://github.com/user-attachments/assets/12df0611-916e-4be0-b588-15ac74a69568" />
+
 
 ### Home Page After Login
 
-<img width="1917" height="881" alt="Screenshot 2026-03-26 032833" src="https://github.com/user-attachments/assets/e53102c4-bcce-4056-a61d-1ed8f79b88d0" />
+<img width="1917" height="881" alt="Screenshot 2026-03-26 032833" src="https://github.com/user-attachments/assets/8f0b9997-43bd-4d36-b618-b2bbd8477421" />
+
 
 
 ### Profile Page
 
-<img width="1912" height="877" alt="Screenshot 2026-03-20 194139" src="https://github.com/user-attachments/assets/ed54041f-7204-4ea1-95fc-0e5a20b672de" />
+<img width="1919" height="881" alt="Screenshot 2026-03-26 034638" src="https://github.com/user-attachments/assets/c518c977-0f73-4db8-bfdb-47e71d0d81ac" />
+<img width="1918" height="878" alt="Screenshot 2026-03-26 034658" src="https://github.com/user-attachments/assets/f5752f4c-4853-4430-8a6c-90ceceb02e89" />
+
+
 
 ### Add Product
-<img width="1919" height="880" alt="Screenshot 2026-03-20 190710" src="https://github.com/user-attachments/assets/d8bb6665-be15-4d2a-b666-8c16450346ac" />
+<img width="1919" height="881" alt="Screenshot 2026-03-26 033728" src="https://github.com/user-attachments/assets/a1db9fdd-c70b-472f-890a-2ee79fb6f796" />
+
 
 ### Edit Product
 
-<img width="1918" height="876" alt="Screenshot 2026-03-20 194448" src="https://github.com/user-attachments/assets/0573c2d9-281c-41a5-94fb-57ffd98ec117" />
+<img width="1919" height="882" alt="Screenshot 2026-03-26 033802" src="https://github.com/user-attachments/assets/2c67f14f-6cb7-40c5-8213-6d28bb572708" />
+
 
 ### Chat System
 
-<img width="1917" height="878" alt="Screenshot 2026-03-20 191529" src="https://github.com/user-attachments/assets/d17a9ed9-939c-4f2f-8893-6195ba0dc11c" />
+<img width="1844" height="873" alt="Screenshot 2026-03-26 034423" src="https://github.com/user-attachments/assets/88f9ae4b-4c05-4860-a1ac-bb60dc72fa90" />
+
 
 ### Exchange Dashboard
 <img width="1919" height="879" alt="Screenshot 2026-03-20 191857" src="https://github.com/user-attachments/assets/1dcca64b-19fc-45b6-aef6-dceb18729942" />
@@ -184,8 +214,8 @@ http://localhost:8080
 
 ### Show Page
 
-<img width="1919" height="880" alt="Screenshot 2026-03-20 191217" src="https://github.com/user-attachments/assets/ed74e735-ef85-49b8-b4ce-ad49b3b29784" />
-<img width="1912" height="878" alt="Screenshot 2026-03-20 191355" src="https://github.com/user-attachments/assets/8cf1ce12-e137-49a3-ad82-f6b88990f5bd" />
+<img width="1919" height="880" alt="Screenshot 2026-03-26 033016" src="https://github.com/user-attachments/assets/d598b58a-ab1e-4cc9-b1d9-ac7d5d60fbbe" />
+
 
 
 ##  Future Improvements
