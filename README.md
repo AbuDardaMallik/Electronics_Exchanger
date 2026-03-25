@@ -46,7 +46,6 @@ Built with Node.js, Express, MongoDB, and Socket.io.
 - Instant message delivery (Socket.io)
 - Sent ✔, Delivered ✔✔, Seen status
 - Auto-scroll chat UI
-- 
 - --
 
 ###  Reviews & Ratings
